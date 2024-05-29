@@ -128,8 +128,8 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 16
-      height: 16
+      width: 14
+      height: 15
     spriteID: 3e3aa00ca184fec41ad51a9dba5378b0
     spriteBone: []
     spriteOutline: []
@@ -141,15 +141,15 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 4}
   - name: down_Frame_1
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: -0.06666667}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
-      y: 28
-      width: 16
-      height: 16
+      x: 48
+      y: 4
+      width: 12
+      height: 15
     spriteID: f988c72ab44259147859657fb7cf55f5
     spriteBone: []
     spriteOutline: []
@@ -158,7 +158,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 28}
+    uvTransform: {x: 48, y: 4}
   - name: down_Frame_2
     originalName: 
     pivot: {x: 0.5, y: 0}
@@ -166,10 +166,10 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 28
+      x: 26
       y: 4
-      width: 16
-      height: 16
+      width: 14
+      height: 15
     spriteID: 0c254663863996d409b0db4fd02d0ca4
     spriteBone: []
     spriteOutline: []
@@ -178,18 +178,18 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 28, y: 4}
+    uvTransform: {x: 26, y: 4}
   - name: down_Frame_3
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: -0.06666667}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 28
-      y: 28
-      width: 16
-      height: 16
+      x: 4
+      y: 27
+      width: 12
+      height: 15
     spriteID: 2a1ce831940b06c41b04d68c2581c435
     spriteBone: []
     spriteOutline: []
@@ -198,7 +198,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 28, y: 28}
+    uvTransform: {x: 4, y: 27}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -211,34 +211,34 @@ ScriptedImporter:
     - name: down_Frame_0
       frameIndex: 0
       cellRect:
-        x: 0
+        x: 1
         y: 0
-        width: 16
-        height: 16
+        width: 14
+        height: 15
       spriteId: 3e3aa00ca184fec41ad51a9dba5378b0
     - name: down_Frame_1
       frameIndex: 1
       cellRect:
-        x: 0
-        y: 0
-        width: 16
-        height: 16
+        x: 2
+        y: 1
+        width: 12
+        height: 15
       spriteId: f988c72ab44259147859657fb7cf55f5
     - name: down_Frame_2
       frameIndex: 2
       cellRect:
-        x: 0
+        x: 1
         y: 0
-        width: 16
-        height: 16
+        width: 14
+        height: 15
       spriteId: 0c254663863996d409b0db4fd02d0ca4
     - name: down_Frame_3
       frameIndex: 3
       cellRect:
-        x: 0
-        y: 0
-        width: 16
-        height: 16
+        x: 2
+        y: 1
+        width: 12
+        height: 15
       spriteId: 2a1ce831940b06c41b04d68c2581c435
     linkedCells: []
     parentIndex: -1
