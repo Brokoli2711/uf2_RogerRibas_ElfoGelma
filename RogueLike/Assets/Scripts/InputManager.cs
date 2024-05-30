@@ -1,3 +1,5 @@
+using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,9 +11,12 @@ public class InputManager : MonoBehaviour
     private AnimatorManager animatorManager;
 
     public Vector2 movementInput;
-    private float moveAmount;
     public float verticalInput;
     public float horizontalInput;
+
+    private float attackInput;
+
+    public static event Action OnAttack;
 
     private void Start()
     {
@@ -22,7 +27,9 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
         movementInput = playerInput.actions["Move"].ReadValue<Vector2>();
+        attackInput = playerInput.actions["Fire"].ReadValue<float>();
         HandleMovementInput();
+        HandleAttack();
     }
 
     private void HandleMovementInput()
@@ -34,5 +41,9 @@ public class InputManager : MonoBehaviour
         animatorManager.UpdateAnimatorValues(horizontalInput, verticalInput);
     }
 
+    private void HandleAttack()
+    {
+        if(attackInput > 0) OnAttack.Invoke();
+    }
 
 }
