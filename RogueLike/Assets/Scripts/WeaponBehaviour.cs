@@ -5,8 +5,6 @@ using UnityEngine;
 
 public abstract class WeaponBehavior : MonoBehaviour
 {
-    public GameObject bullet;
-
     public float accuracy;
     public float numberBullets;
 

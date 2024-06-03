@@ -14,7 +14,7 @@ public class InputManager : MonoBehaviour
     public float verticalInput;
     public float horizontalInput;
 
-    private float attackInput;
+    public Vector2 attackInput;
 
     public static event Action OnAttack;
 
@@ -27,9 +27,8 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
         movementInput = playerInput.actions["Move"].ReadValue<Vector2>();
-        attackInput = playerInput.actions["Fire"].ReadValue<float>();
+        attackInput = playerInput.actions["Shoot"].ReadValue<Vector2>().normalized * 0.15f;
         HandleMovementInput();
-        HandleAttack();
     }
 
     private void HandleMovementInput()
@@ -41,9 +40,5 @@ public class InputManager : MonoBehaviour
         animatorManager.UpdateAnimatorValues(horizontalInput, verticalInput);
     }
 
-    private void HandleAttack()
-    {
-        if(attackInput > 0) OnAttack.Invoke();
-    }
 
 }
