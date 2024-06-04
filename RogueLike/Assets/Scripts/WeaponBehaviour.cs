@@ -13,11 +13,12 @@ public abstract class WeaponBehavior : MonoBehaviour
 
 
     public AudioSource audioSource;
-
+    public InputManager inputManager;
     void Start()
     {
         secondsSinceLastShot = secBeetweenShots;
         audioSource = GetComponent<AudioSource>();
+        inputManager = GetComponentInParent<InputManager>();
     }
 
     // Update is called once per frame

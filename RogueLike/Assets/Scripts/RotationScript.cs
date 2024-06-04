@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RotationScript : MonoBehaviour
 {
-    private Transform parent;
     InputManager inputManager;
     SpriteRenderer spriteRenderer;
 
@@ -12,7 +12,6 @@ public class RotationScript : MonoBehaviour
     private void Start()
     {
         inputManager = GetComponentInParent<InputManager>();
-        parent = GetComponentInParent<Transform>();
         spriteRenderer = GetComponent<SpriteRenderer>();    
     }
 
@@ -25,14 +24,28 @@ public class RotationScript : MonoBehaviour
 
     private void MoveWeapon()
     {
-        transform.localPosition = new Vector2(inputManager.attackInput.x, 
+        if(inputManager.attackInput.y > 0)
+        {
+            transform.localPosition = new Vector2(inputManager.attackInput.x,
+            inputManager.attackInput.y + 0.05f);
+            if (inputManager.attackInput.x == 0) transform.localPosition = new Vector2(0.1f, inputManager.attackInput.y + 0.1f);
+        }
+        else
+        {
+            transform.localPosition = new Vector2(inputManager.attackInput.x,
             inputManager.attackInput.y);
+        }
+        
+        if (inputManager.attackInput.y < 0 && inputManager.attackInput.x == 0) transform.localPosition = new Vector2(-0.1f, inputManager.attackInput.y);
     }
 
     private void RotateWeapon()
     {
         float angle = Mathf.Atan2(inputManager.attackInput.y, inputManager.attackInput.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
+        if(inputManager.attackInput.x < 0) spriteRenderer.flipY = true;
+        else spriteRenderer.flipY = false;
+
     }
     
     

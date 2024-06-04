@@ -272,6 +272,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: pistol
       objectReference: {fileID: 0}
+    - target: {fileID: -2253911629886400664, guid: d2ab7e26e83594c438724189b156d231, type: 3}
+      propertyPath: m_TagString
+      value: Weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: d2ab7e26e83594c438724189b156d231, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: d2ab7e26e83594c438724189b156d231, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -302,15 +310,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: d2ab7e26e83594c438724189b156d231, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: d2ab7e26e83594c438724189b156d231, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: d2ab7e26e83594c438724189b156d231, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: d2ab7e26e83594c438724189b156d231, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -354,7 +362,7 @@ GameObject:
   - component: {fileID: 1722069821}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -631,7 +639,8 @@ MonoBehaviour:
   secBeetweenShots: 1
   secondsSinceLastShot: 0
   audioSource: {fileID: 0}
-  bulletSpeed: 0
+  inputManager: {fileID: 0}
+  bulletSpeed: 40
   bullet: {fileID: 5260714303826737651, guid: dcd817d389a80c54eaf340ed3a5609e5, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

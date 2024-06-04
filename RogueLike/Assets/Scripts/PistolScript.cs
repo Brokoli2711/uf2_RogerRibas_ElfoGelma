@@ -11,18 +11,15 @@ public class PistolScript : WeaponBehavior
     {
         if (this == null) return;
 
-        Vector2 targetPosition = Input.mousePosition;
-
         if (secondsSinceLastShot >= secBeetweenShots)
         {
 
             for (int i = 0; i < numberBullets; i++)
             {
-                //GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
                 GameObject newBullet = Instantiate(bullet, transform.position + transform.forward, transform.rotation);
-                newBullet.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed;
+                BulletScript newBulletManager = newBullet.GetComponent<BulletScript>();
+                newBulletManager.ShootBullet(inputManager.attackInput, bulletSpeed);
 
-                newBullet.transform.LookAt(targetPosition);
                 secondsSinceLastShot = 0;
             }
 

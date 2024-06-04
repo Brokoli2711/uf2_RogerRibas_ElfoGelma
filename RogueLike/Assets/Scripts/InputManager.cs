@@ -27,8 +27,9 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
         movementInput = playerInput.actions["Move"].ReadValue<Vector2>();
-        attackInput = playerInput.actions["Shoot"].ReadValue<Vector2>().normalized * 0.15f;
+        attackInput = playerInput.actions["Shoot"].ReadValue<Vector2>().normalized * 0.1f;
         HandleMovementInput();
+        CheckAttack();
     }
 
     private void HandleMovementInput()
@@ -38,6 +39,14 @@ public class InputManager : MonoBehaviour
         if (movementInput.x != 0) horizontalInput = Mathf.Sign(movementInput.x);
         else horizontalInput = 0;
         animatorManager.UpdateAnimatorValues(horizontalInput, verticalInput);
+    }
+
+    private void CheckAttack()
+    {
+        if(attackInput != new Vector2(0,0))
+        {
+            OnAttack?.Invoke();
+        }
     }
 
 
