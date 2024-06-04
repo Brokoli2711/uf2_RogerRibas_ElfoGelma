@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PistolScript : WeaponBehavior
@@ -16,7 +17,11 @@ public class PistolScript : WeaponBehavior
 
             for (int i = 0; i < numberBullets; i++)
             {
-                GameObject newBullet = Instantiate(bullet, transform.position + transform.forward, transform.rotation);
+                GameObject newBullet;
+                if (inputManager.attackInput.x < 0) newBullet = Instantiate(bullet, new Vector2(transform.position.x, transform.position.y + 0.4f), transform.rotation);
+                else newBullet = Instantiate(bullet, transform.position, transform.rotation);
+
+
                 BulletScript newBulletManager = newBullet.GetComponent<BulletScript>();
                 newBulletManager.ShootBullet(inputManager.attackInput, bulletSpeed);
 
