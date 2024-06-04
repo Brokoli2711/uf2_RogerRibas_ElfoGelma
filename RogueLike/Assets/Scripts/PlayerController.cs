@@ -8,8 +8,6 @@ public class PlayerController : MonoBehaviour
     private InputManager inputM;
     private Rigidbody2D rb;
 
-
-    public int hp;
     private Vector2 movementValue;
 
     public int speed = 5;
@@ -35,11 +33,6 @@ public class PlayerController : MonoBehaviour
         movementValue = inputM.movementInput;
 
         rb.velocity = movementValue * speed;
-    }
-
-    public void DealDamage(int damage)
-    {
-        hp = hp - damage;
     }
 
 }
