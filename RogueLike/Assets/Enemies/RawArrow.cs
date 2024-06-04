@@ -1,42 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class RawArrow : MonoBehaviour
+public class StationaryShooter : MonoBehaviour
 {
-    public GameObject projectilePrefab; //Prefab del proyectil
-    public Transform firePoint; //Punto desde donde se disparan los proyectiles
-    public float fireRate = 1f; //Tiempo entre disparos
-    public float projectileSpeed = 10f; // Velocidad del proyectil
-
+    public GameObject projectilePrefab;
+    public float fireRate = 1f;
+    public float projectileSpeed = 10f;
+    private SpriteRenderer spriteRenderer;
     private Transform player;
     private float nextFireTime = 0f;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        if (player != null && Time.time >= nextFireTime)
+        if (player != null)
         {
-            Shoot();
-            nextFireTime = Time.time + 1f / fireRate;
+            if (player.position.x < transform.position.x)
+            {
+                spriteRenderer.flipX = false; 
+            }
+            else
+            {
+                spriteRenderer.flipX = true; 
+            }
+
+            if (Time.time >= nextFireTime)
+            {
+                Shoot();
+                nextFireTime = Time.time + 1f / fireRate;
+            }
         }
     }
 
     void Shoot()
     {
-        // Instanciar el proyectil en el punto de disparo
-        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        projectile.tag = "arrow";
+        Vector2 targetPosition = player.position;
+        Vector2 shooterPosition = transform.position;
+        Vector2 direction = (targetPosition - shooterPosition).normalized;
 
-        // Calcular la dirección hacia el jugador
-        Vector2 direction = (player.position - firePoint.position).normalized;
-        projectile.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed;
+        GameObject projectile = Instantiate(projectilePrefab, shooterPosition, Quaternion.identity);
+        projectile.tag = "Arrow";
 
-        // Orientar el proyectil hacia el jugador
+        Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+        rb.velocity = direction * projectileSpeed;
+
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         projectile.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
