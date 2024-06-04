@@ -72,7 +72,6 @@ public class WombBomb : MonoBehaviour
                 Debug.Log(nearbyObject.name);
             }
         }
-        Destroy(gameObject);
     }
 
 
@@ -98,10 +97,11 @@ public class WombBomb : MonoBehaviour
     IEnumerator ExplodeCD()
     {
         wombAnimator.SetTrigger("Explode");
+        Explode();
         //Debug.Log("Corrutina");
         yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
 
-        Explode();
 
     }
 }

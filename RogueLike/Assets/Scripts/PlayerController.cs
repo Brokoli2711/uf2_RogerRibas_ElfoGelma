@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     public void DealDamage(int damage)
     {
+        GetComponent<ParticleSystem>().Play();
         hp = hp - damage;
     }
     private void Update()
