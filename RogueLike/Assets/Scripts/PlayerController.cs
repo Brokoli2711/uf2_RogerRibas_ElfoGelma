@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 movementValue;
 
     public int speed = 5;
-
+    public int hp = 3;
 
     private void Start()
     {
@@ -21,6 +21,10 @@ public class PlayerController : MonoBehaviour
         inputM = GetComponent<InputManager>();
     }
 
+    public void DealDamage(int damage)
+    {
+        hp = hp - damage;
+    }
     private void Update()
     {
         ActionMove();
