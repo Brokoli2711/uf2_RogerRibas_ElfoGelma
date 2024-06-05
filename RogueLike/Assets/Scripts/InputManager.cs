@@ -17,6 +17,7 @@ public class InputManager : MonoBehaviour
     public Vector2 attackInput;
 
     public static event Action OnAttack;
+    public static event Action NotAttack;
 
     private void Start()
     {
@@ -47,6 +48,7 @@ public class InputManager : MonoBehaviour
         {
             OnAttack?.Invoke();
         }
+        else NotAttack?.Invoke();
     }
 
 

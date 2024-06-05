@@ -7,12 +7,16 @@ public class RotationScript : MonoBehaviour
 {
     InputManager inputManager;
     SpriteRenderer spriteRenderer;
+    public Quaternion rotationQuaternion;
+    public bool flip;
+    public float offset;
 
 
     private void Start()
     {
         inputManager = GetComponentInParent<InputManager>();
-        spriteRenderer = GetComponent<SpriteRenderer>();    
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        transform.rotation = rotationQuaternion;
     }
 
     private void Update()
@@ -24,27 +28,57 @@ public class RotationScript : MonoBehaviour
 
     private void MoveWeapon()
     {
-        if(inputManager.attackInput.y > 0)
+        float posX = 0;
+        float posY = 0;
+        if (inputManager.attackInput.x > 0)
         {
-            transform.localPosition = new Vector2(inputManager.attackInput.x,
-            inputManager.attackInput.y + 0.05f);
-            if (inputManager.attackInput.x == 0) transform.localPosition = new Vector2(0.1f, inputManager.attackInput.y + 0.1f);
+            posX = 0.1f;
         }
-        else
+        else if (inputManager.attackInput.x < 0)
         {
-            transform.localPosition = new Vector2(inputManager.attackInput.x,
-            inputManager.attackInput.y);
+            posX = -0.1f;
+            posY = 0.1f;
         }
-        
-        if (inputManager.attackInput.y < 0 && inputManager.attackInput.x == 0) transform.localPosition = new Vector2(-0.1f, inputManager.attackInput.y);
+        else if (inputManager.attackInput.y > 0)
+        {
+            posY = 0.2f;
+            posX = -0.05f;
+        }
+        else if (inputManager.attackInput.y < 0)
+        {
+            posY = -0.05f;
+            posX = 0.05f;
+        }
+
+        transform.localPosition = new Vector2(posX, posY);
+
     }
 
     private void RotateWeapon()
     {
-        float angle = Mathf.Atan2(inputManager.attackInput.y, inputManager.attackInput.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
-        if(inputManager.attackInput.x < 0) spriteRenderer.flipY = true;
-        else spriteRenderer.flipY = false;
+
+        if (inputManager.attackInput.x < 0)
+        {
+            spriteRenderer.flipY = true;
+            spriteRenderer.flipX = true;
+        }
+        else if (inputManager.attackInput.y < 0)
+        {
+            spriteRenderer.flipY = true;
+            spriteRenderer.flipX = false;
+        }
+        else if (inputManager.attackInput.y > 0)
+        {
+            spriteRenderer.flipX = true;
+            spriteRenderer.flipY = false;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+            spriteRenderer.flipY = false;
+        }
+
+
 
     }
     

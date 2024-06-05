@@ -6,6 +6,7 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     Rigidbody2D rb;
+    public float damage = 1f;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();

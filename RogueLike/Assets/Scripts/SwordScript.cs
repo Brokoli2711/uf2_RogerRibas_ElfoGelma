@@ -1,21 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class PistolScript : WeaponBehavior
+public class SwordScript : WeaponBehavior
 {
+    private BoxCollider2D boxCollider2d;
     private SpriteRenderer spriteRenderer;
+    public float damage = 2.5f;
     public Quaternion rotationQuaternion;
-    public float bulletSpeed;
-    public GameObject bullet;
 
     private void Start()
     {
+        boxCollider2d = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        inputManager = GetComponentInParent<InputManager>();
         transform.rotation = rotationQuaternion;
+        boxCollider2d .enabled = false;
     }
 
     private void Update()
@@ -23,26 +22,27 @@ public class PistolScript : WeaponBehavior
         MoveWeapon();
         RotateWeapon();
     }
+
     public override void Fire()
     {
-        if (this == null) return;
+        if (boxCollider2d != null) boxCollider2d.enabled = true;
+    }
 
-        if (secondsSinceLastShot >= secBeetweenShots)
+    private void OnEnable()
+    {
+        InputManager.NotAttack += NotAttacking;
+    }
+
+    private void NotAttacking()
+    {
+        if (boxCollider2d != null) boxCollider2d.enabled = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
         {
-
-            for (int i = 0; i < numberBullets; i++)
-            {
-                GameObject newBullet;
-                if (inputManager.attackInput.x < 0) newBullet = Instantiate(bullet, new Vector2(transform.position.x, transform.position.y + 0.4f), transform.rotation);
-                else newBullet = Instantiate(bullet, transform.position, transform.rotation);
-
-
-                BulletScript newBulletManager = newBullet.GetComponent<BulletScript>();
-                newBulletManager.ShootBullet(inputManager.attackInput, bulletSpeed);
-
-                secondsSinceLastShot = 0;
-            }
-
+            
         }
     }
 
@@ -76,29 +76,26 @@ public class PistolScript : WeaponBehavior
 
     private void RotateWeapon()
     {
-        Quaternion temporalRotation = rotationQuaternion;
 
         if (inputManager.attackInput.x < 0)
         {
-            spriteRenderer.flipY = false;
+            spriteRenderer.flipY = true;
             spriteRenderer.flipX = true;
-            transform.rotation = rotationQuaternion;
         }
         else if (inputManager.attackInput.y < 0)
         {
-            temporalRotation.z = 270;
-            transform.rotation = temporalRotation;
+            spriteRenderer.flipY = true;
+            spriteRenderer.flipX = false;
         }
         else if (inputManager.attackInput.y > 0)
         {
-            temporalRotation.z = 90;
-            transform.rotation = temporalRotation;
+            spriteRenderer.flipX = true;
+            spriteRenderer.flipY = false;
         }
         else
         {
             spriteRenderer.flipX = false;
             spriteRenderer.flipY = false;
-            transform.rotation = rotationQuaternion;
         }
 
 

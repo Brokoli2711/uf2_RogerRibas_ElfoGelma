@@ -2,12 +2,9 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class WombBomb : MonoBehaviour
+public class WombBomb : EnemyScript
 {
-    public float speed = 5f;
     public float explosionRadius = 5f;
-    public int health = 3;
-    //public GameObject explosionEffect; // Efecto explosion
     public AudioClip explosionSound; // Sonido explosion
 
 
@@ -75,17 +72,7 @@ public class WombBomb : MonoBehaviour
     }
 
 
-    //Recibir daño
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Bullet"))
-        {
-            //TakeDamage(collision.GetComponent()); Funcion de recibir daño
-            Destroy(collision.gameObject); // Destruir Bala
-        }
-    }
-
-    void TakeDamage(int damage)
+    override public void TakeDamage(float damage)
     {
         health -= damage;
         if (health <= 0)

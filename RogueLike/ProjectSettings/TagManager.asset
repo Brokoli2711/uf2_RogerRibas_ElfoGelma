@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - Obstacle
   - Arrow
+  - Enemy
+  - Sword
   layers:
   - Default
   - TransparentFX
