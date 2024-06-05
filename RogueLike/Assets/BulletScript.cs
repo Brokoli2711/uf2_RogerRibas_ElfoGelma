@@ -17,6 +17,10 @@ public class BulletScript : MonoBehaviour
     {
         //other.SendMessage("Hurt");
         if (!other.CompareTag("Player") && !other.CompareTag("Weapon")) Destroy(gameObject);
+        if (other.CompareTag("Enemy"))
+        {
+            other.gameObject.BroadcastMessage("TakeDamage", damage);
+        }
     }
 
     IEnumerator DestroyBullet()
@@ -29,5 +33,6 @@ public class BulletScript : MonoBehaviour
     {
         rb.velocity = direction * bulletSpeed;
     }
+
 
 }

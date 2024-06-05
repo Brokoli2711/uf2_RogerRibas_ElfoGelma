@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StationaryShooter : MonoBehaviour
+public class StationaryShooter : EnemyScript
 {
     public GameObject projectilePrefab;
     public float fireRate = 1f;
@@ -50,5 +50,14 @@ public class StationaryShooter : MonoBehaviour
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         projectile.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    }
+
+    override public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

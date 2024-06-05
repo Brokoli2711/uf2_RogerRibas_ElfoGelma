@@ -51,7 +51,6 @@ public class WombBomb : EnemyScript
     void Explode()
     {
         isExploding = true;
-        Debug.Log("Exploding " + isExploding);
         //SonidoExplotar
         if (explosionSound != null)
         {
@@ -66,7 +65,6 @@ public class WombBomb : EnemyScript
             if (nearbyObject.CompareTag("Player"))
             {
                 nearbyObject.gameObject.BroadcastMessage("DealDamage", 2);
-                Debug.Log(nearbyObject.name);
             }
         }
     }
@@ -77,7 +75,7 @@ public class WombBomb : EnemyScript
         health -= damage;
         if (health <= 0)
         {
-            Explode();
+            StartCoroutine(ExplodeCD());
         }
     }
 

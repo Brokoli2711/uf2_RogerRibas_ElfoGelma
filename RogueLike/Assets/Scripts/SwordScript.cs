@@ -13,19 +13,27 @@ public class SwordScript : WeaponBehavior
     {
         boxCollider2d = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        inputManager = GetComponentInParent<InputManager>();
         transform.rotation = rotationQuaternion;
-        boxCollider2d .enabled = false;
     }
 
     private void Update()
     {
-        MoveWeapon();
-        RotateWeapon();
+        if(inputManager != null)
+        {
+            InputManager.OnAttack += Fire;
+            MoveWeapon();
+            RotateWeapon();
+        }
+        
     }
 
     public override void Fire()
     {
-        if (boxCollider2d != null) boxCollider2d.enabled = true;
+        if (boxCollider2d != null)
+        {
+            boxCollider2d.enabled = true;
+        } 
     }
 
     private void OnEnable()
@@ -42,7 +50,7 @@ public class SwordScript : WeaponBehavior
     {
         if (collision.CompareTag("Enemy"))
         {
-            
+            collision.gameObject.BroadcastMessage("TakeDamage", damage);
         }
     }
 
@@ -50,6 +58,7 @@ public class SwordScript : WeaponBehavior
     {
         float posX = 0;
         float posY = 0;
+
         if (inputManager.attackInput.x > 0)
         {
             posX = 0.1f;

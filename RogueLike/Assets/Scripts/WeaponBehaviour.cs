@@ -6,7 +6,6 @@ using UnityEngine;
 public abstract class WeaponBehavior : MonoBehaviour
 {
     public float numberBullets;
-
     public float secBeetweenShots;
     public float secondsSinceLastShot;
 

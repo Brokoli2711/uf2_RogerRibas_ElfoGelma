@@ -13,6 +13,7 @@ public class PistolScript : WeaponBehavior
 
     private void Start()
     {
+        secondsSinceLastShot = secBeetweenShots;
         spriteRenderer = GetComponent<SpriteRenderer>();
         inputManager = GetComponentInParent<InputManager>();
         transform.rotation = rotationQuaternion;
@@ -20,21 +21,22 @@ public class PistolScript : WeaponBehavior
 
     private void Update()
     {
+        secondsSinceLastShot += Time.deltaTime;
+        InputManager.OnAttack += Fire;
         MoveWeapon();
         RotateWeapon();
+
     }
     public override void Fire()
     {
-        if (this == null) return;
+        if(this == null) return;
 
         if (secondsSinceLastShot >= secBeetweenShots)
         {
 
             for (int i = 0; i < numberBullets; i++)
             {
-                GameObject newBullet;
-                if (inputManager.attackInput.x < 0) newBullet = Instantiate(bullet, new Vector2(transform.position.x, transform.position.y + 0.4f), transform.rotation);
-                else newBullet = Instantiate(bullet, transform.position, transform.rotation);
+                GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
 
 
                 BulletScript newBulletManager = newBullet.GetComponent<BulletScript>();
@@ -52,22 +54,21 @@ public class PistolScript : WeaponBehavior
         float posY = 0;
         if (inputManager.attackInput.x > 0)
         {
-            posX = 0.1f;
+            posX = 0.15f;
         }
         else if (inputManager.attackInput.x < 0)
         {
-            posX = -0.1f;
-            posY = 0.1f;
+            posX = -0.15f;
         }
         else if (inputManager.attackInput.y > 0)
         {
-            posY = 0.2f;
-            posX = -0.05f;
+            posY = 0.25f;
+            posX = 0.08f;
         }
         else if (inputManager.attackInput.y < 0)
         {
-            posY = -0.05f;
-            posX = 0.05f;
+            posY = -0.1f;
+            posX = -0.1f;
         }
 
         transform.localPosition = new Vector2(posX, posY);
@@ -87,12 +88,12 @@ public class PistolScript : WeaponBehavior
         else if (inputManager.attackInput.y < 0)
         {
             temporalRotation.z = 270;
-            transform.rotation = temporalRotation;
+            transform.rotation = Quaternion.Euler(0, 0, temporalRotation.z);
         }
         else if (inputManager.attackInput.y > 0)
         {
             temporalRotation.z = 90;
-            transform.rotation = temporalRotation;
+            transform.rotation = Quaternion.Euler(0,0, temporalRotation.z);
         }
         else
         {
