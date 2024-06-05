@@ -1,46 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class PistolScript : WeaponBehavior
+public class Flamethrower : WeaponBehavior
 {
-    public float bulletSpeed;
-    public GameObject bullet;
+    public ParticleSystem fireParticles;
+    public float damage = 0.1f;
+    public float fuelConsumptionRate; // La cantidad de combustible consumido por segundo
+
+    private bool isFiring;
 
     private void Start()
     {
         base.Start();
-        secondsSinceLastShot = secBeetweenShots;
-        transform.rotation = rotationQuaternion;
+        isFiring = false;
+        fireParticles.Stop();
     }
 
-    private void Update()
-    {
-        base.Update();
-        secondsSinceLastShot += Time.deltaTime;
-
-    }
     public override void Fire()
     {
-        if(this == null) return;
-
-        if (secondsSinceLastShot >= secBeetweenShots)
+        if (numberBullets > 0)
         {
-
-            for (int i = 0; i < numberBullets; i++)
+            if (!isFiring)
             {
-                GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
-
-
-                BulletScript newBulletManager = newBullet.GetComponent<BulletScript>();
-                newBulletManager.ShootBullet(inputManager.attackInput, bulletSpeed);
-
-                secondsSinceLastShot = 0;
+                isFiring = true;
+                fireParticles.Play();
+                //audioSource.Play();
             }
 
+            if (numberBullets <= 0)
+            {
+                StopFiring();
+                StartCoroutine(Recharge());
+            }
         }
+    }
+
+    private void OnEnable()
+    {
+        InputManager.NotAttack += NotAttacking;
+    }
+
+
+    private void NotAttacking()
+    {
+        StopFiring();
+    }
+
+    void StopFiring()
+    {
+        isFiring = false;
+        fireParticles.Stop();
+        //audioSource.Stop();
     }
 
     override public void MoveWeapon()
@@ -76,19 +87,21 @@ public class PistolScript : WeaponBehavior
 
         if (inputManager.attackInput.x < 0)
         {
-            spriteRenderer.flipY = false;
-            spriteRenderer.flipX = true;
-            transform.rotation = rotationQuaternion;
+            temporalRotation.z = 180;
+            spriteRenderer.flipY = true;
+            transform.rotation = Quaternion.Euler(0,0, temporalRotation.z);
         }
         else if (inputManager.attackInput.y < 0)
         {
             temporalRotation.z = 270;
+            spriteRenderer.flipY = false;
             transform.rotation = Quaternion.Euler(0, 0, temporalRotation.z);
         }
         else if (inputManager.attackInput.y > 0)
         {
             temporalRotation.z = 90;
-            transform.rotation = Quaternion.Euler(0,0, temporalRotation.z);
+            spriteRenderer.flipY = false;
+            transform.rotation = Quaternion.Euler(0, 0, temporalRotation.z);
         }
         else
         {
@@ -97,7 +110,13 @@ public class PistolScript : WeaponBehavior
             transform.rotation = rotationQuaternion;
         }
 
+    }
 
+    IEnumerator Recharge()
+    {
+        yield return new WaitForSeconds(3f);
+
+        numberBullets = 10000;
 
     }
 }

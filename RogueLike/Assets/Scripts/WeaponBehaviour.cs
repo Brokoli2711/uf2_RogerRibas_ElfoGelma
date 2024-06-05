@@ -8,25 +8,35 @@ public abstract class WeaponBehavior : MonoBehaviour
     public float numberBullets;
     public float secBeetweenShots;
     public float secondsSinceLastShot;
+    public Quaternion rotationQuaternion;
 
 
+    public SpriteRenderer spriteRenderer;
     public AudioSource audioSource;
     public InputManager inputManager;
-    void Start()
+    public void Start()
     {
-        secondsSinceLastShot = secBeetweenShots;
-        audioSource = GetComponent<AudioSource>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        //audioSource = GetComponent<AudioSource>();
         inputManager = GetComponentInParent<InputManager>();
+        transform.rotation = rotationQuaternion;
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        secondsSinceLastShot += Time.deltaTime;
-
-        InputManager.OnAttack += Fire;
+        if (inputManager != null)
+        {
+            InputManager.OnAttack += Fire;
+            MoveWeapon();
+            RotateWeapon();
+        }
 
     }
+
+    public abstract void MoveWeapon();  
+
+    public abstract void RotateWeapon();
 
 
     public abstract void Fire();

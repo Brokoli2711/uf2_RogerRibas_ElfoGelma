@@ -7,17 +7,8 @@ public class RotationScript : MonoBehaviour
 {
     InputManager inputManager;
     SpriteRenderer spriteRenderer;
-    public Quaternion rotationQuaternion;
     public bool flip;
     public float offset;
-
-
-    private void Start()
-    {
-        inputManager = GetComponentInParent<InputManager>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        transform.rotation = rotationQuaternion;
-    }
 
     private void Update()
     {

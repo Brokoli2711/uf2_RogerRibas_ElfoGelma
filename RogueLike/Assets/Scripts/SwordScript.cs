@@ -5,27 +5,13 @@ using UnityEngine;
 public class SwordScript : WeaponBehavior
 {
     private BoxCollider2D boxCollider2d;
-    private SpriteRenderer spriteRenderer;
     public float damage = 2.5f;
-    public Quaternion rotationQuaternion;
 
     private void Start()
     {
+        base.Start();
         boxCollider2d = GetComponent<BoxCollider2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        inputManager = GetComponentInParent<InputManager>();
         transform.rotation = rotationQuaternion;
-    }
-
-    private void Update()
-    {
-        if(inputManager != null)
-        {
-            InputManager.OnAttack += Fire;
-            MoveWeapon();
-            RotateWeapon();
-        }
-        
     }
 
     public override void Fire()
@@ -54,7 +40,7 @@ public class SwordScript : WeaponBehavior
         }
     }
 
-    private void MoveWeapon()
+    override public void MoveWeapon()
     {
         float posX = 0;
         float posY = 0;
@@ -83,7 +69,7 @@ public class SwordScript : WeaponBehavior
 
     }
 
-    private void RotateWeapon()
+    override public void RotateWeapon()
     {
 
         if (inputManager.attackInput.x < 0)
