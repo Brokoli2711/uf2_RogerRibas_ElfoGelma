@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,9 +14,12 @@ public class ShopManager : MonoBehaviour
     public ShopTemplate[] shopPanels;
     public Button[] myPurchaseBtns;
 
+    private PlayerController playerController;
+
     private void Start()
     {
-        for(int i = 0; i < shopItemsSO.Length; i++)
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        for (int i = 0; i < shopItemsSO.Length; i++)
         {
             shopPanelsGO[i].SetActive(true);
         }
@@ -25,10 +29,6 @@ public class ShopManager : MonoBehaviour
         CheckPurchaseable();
     }
 
-    private void Update()
-    {
-        
-    }
 
     public void AddPoints()
     {
@@ -70,5 +70,15 @@ public class ShopManager : MonoBehaviour
             shopPanels[i].descriptionTxt.text = shopItemsSO[i].description;
             shopPanels[i].priceTxt.text = shopItemsSO[i].baseCost.ToString();
         }
+    }
+
+    public void AddHP(float health)
+    {
+        playerController.hp += health;
+    }
+
+    public void AddDamage(float damage)
+    {
+        playerController.damage += damage;
     }
 }

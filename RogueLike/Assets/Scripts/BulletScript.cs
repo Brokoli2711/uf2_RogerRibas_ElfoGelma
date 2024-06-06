@@ -7,8 +7,11 @@ public class BulletScript : MonoBehaviour
 {
     Rigidbody2D rb;
     public float damage = 1f;
+
+    private PlayerController playerController;
     private void Awake()
     {
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(DestroyBullet());
     }
@@ -19,7 +22,7 @@ public class BulletScript : MonoBehaviour
         if (!other.CompareTag("Player") && !other.CompareTag("Weapon")) Destroy(gameObject);
         if (other.CompareTag("Enemy"))
         {
-            other.gameObject.BroadcastMessage("TakeDamage", damage);
+            other.gameObject.BroadcastMessage("TakeDamage", damage + playerController.damage);
         }
     }
 

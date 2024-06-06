@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 movementValue;
 
     public int speed = 5;
-    public int hp = 3;
+    public float hp = 3;
+    public float damage = 0;
 
     private void Start()
     {

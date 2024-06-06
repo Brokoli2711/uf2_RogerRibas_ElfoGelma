@@ -16,8 +16,11 @@ public class InputManager : MonoBehaviour
 
     public Vector2 attackInput;
 
+    public float interact;
+
     public static event Action OnAttack;
     public static event Action NotAttack;
+    public static event Action OnInteraction;
 
     private void Start()
     {
@@ -29,8 +32,11 @@ public class InputManager : MonoBehaviour
     {
         movementInput = playerInput.actions["Move"].ReadValue<Vector2>();
         attackInput = playerInput.actions["Shoot"].ReadValue<Vector2>().normalized * 0.1f;
+        interact = playerInput.actions["Interact"].ReadValue<float>();
+        Debug.Log(interact);
         HandleMovementInput();
         CheckAttack();
+        CheckInteraction();
     }
 
     private void HandleMovementInput()
@@ -49,6 +55,11 @@ public class InputManager : MonoBehaviour
             OnAttack?.Invoke();
         }
         else NotAttack?.Invoke();
+    }
+
+    private void CheckInteraction()
+    {
+        if(interact != 0) OnInteraction?.Invoke();
     }
 
 

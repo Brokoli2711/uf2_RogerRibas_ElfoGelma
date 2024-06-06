@@ -6,12 +6,14 @@ public class SwordScript : WeaponBehavior
 {
     private BoxCollider2D boxCollider2d;
     public float damage = 2.5f;
+    private PlayerController playerController;
 
     private void Start()
     {
         base.Start();
         boxCollider2d = GetComponent<BoxCollider2D>();
         transform.rotation = rotationQuaternion;
+        playerController = GetComponentInParent<PlayerController>();
     }
 
     public override void Fire()
@@ -36,7 +38,7 @@ public class SwordScript : WeaponBehavior
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.gameObject.BroadcastMessage("TakeDamage", damage);
+            collision.gameObject.BroadcastMessage("TakeDamage", damage + playerController.damage);
         }
     }
 
