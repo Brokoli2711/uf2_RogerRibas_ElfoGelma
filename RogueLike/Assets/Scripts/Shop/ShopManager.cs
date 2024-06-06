@@ -75,6 +75,7 @@ public class ShopManager : MonoBehaviour
     public void AddHP(float health)
     {
         playerController.hp += health;
+        playerController.totalhp += health;
     }
 
     public void AddDamage(float damage)

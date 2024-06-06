@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviour
@@ -8,6 +9,10 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private int maxRooms = 15;
     [SerializeField] private int minRooms = 7;
 
+    public GameObject hatch;
+    public GameObject[] enemySpawners;
+
+    public List<GameObject> roomList;
     int roomWidth = 20;
     int roomHeight = 12;
 
@@ -32,6 +37,9 @@ public class RoomManager : MonoBehaviour
         //Generation of the initial room on the center of the grid
         Vector2Int initialRoomIndex = new Vector2Int(gridSizeX / 2, gridSizeY / 2);
         StartRoomGenerationFromRoom(initialRoomIndex);
+
+        Invoke("SpawnHatch", 2f);
+        Invoke("SpawnEnemySpawner", 3f);
     }
 
     private void Update()
@@ -91,6 +99,7 @@ public class RoomManager : MonoBehaviour
         roomCount++;
 
         var newRoom = Instantiate(room, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
+
         newRoom.GetComponent<Room>().RoomIndex = roomIndex;
         newRoom.name = $"Room-{roomCount}";
         roomObjects.Add(newRoom);
@@ -179,6 +188,23 @@ public class RoomManager : MonoBehaviour
         if (y < gridSizeY - 1 && roomGrid[x, y + 1] != 0) count++; //Top Neighbour
 
         return count;
+    }
+
+    //Spawns the spawner for enemies
+    void SpawnEnemySpawner()
+    {
+        for (int i = 1; i < roomList.Count - 1; i++)
+        {
+            Instantiate(enemySpawners[Random.Range(0, enemySpawners.Length)], roomList[i].transform.position, Quaternion.identity);
+
+        }
+    }
+
+    //Spawns the hatch to finish the game
+    void SpawnHatch()
+    {
+        //Aquí instanciamos la trampilla para pasar de nivel.
+        Instantiate(hatch, roomList[roomList.Count - 1].transform.position, Quaternion.identity);
     }
 
     private void OnDrawGizmos()

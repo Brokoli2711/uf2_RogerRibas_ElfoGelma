@@ -10,6 +10,8 @@ TagManager:
   - Arrow
   - Enemy
   - Sword
+  - EnemySpawner
+  - Rooms
   layers:
   - Default
   - TransparentFX
