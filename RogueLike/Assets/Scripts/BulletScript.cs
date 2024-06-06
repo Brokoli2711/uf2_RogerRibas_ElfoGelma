@@ -19,7 +19,10 @@ public class BulletScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         //other.SendMessage("Hurt");
-        if (!other.CompareTag("Player") && !other.CompareTag("Weapon")) Destroy(gameObject);
+        if (!other.CompareTag("Player") && !other.CompareTag("Weapon"))
+        {
+            Destroy(gameObject);
+        }
         if (other.CompareTag("Enemy"))
         {
             other.gameObject.BroadcastMessage("TakeDamage", damage + playerController.damage);

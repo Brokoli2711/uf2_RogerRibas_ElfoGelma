@@ -197,7 +197,7 @@ MonoBehaviour:
   speed: 1
   health: 3
   animator: {fileID: 0}
-  explosionRadius: 0.2
+  explosionRadius: 1
   explosionSound: {fileID: 0}
   wombAnimator: {fileID: 0}
 --- !u!1 &6535333377610566759

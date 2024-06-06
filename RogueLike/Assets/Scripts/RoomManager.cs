@@ -9,8 +9,8 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private int maxRooms = 15;
     [SerializeField] private int minRooms = 7;
 
-    public GameObject hatch;
-    public GameObject[] enemySpawners;
+    [SerializeField] public GameObject hatch;
+    [SerializeField] public GameObject[] enemySpawners;
 
     public List<GameObject> roomList;
     int roomWidth = 20;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class SellerScript : MonoBehaviour
 {
     [SerializeField] public GameObject dialogueMark;
-    public GameObject shopUI;
+    [SerializeField] public GameObject shopUI;
     private bool isPlayerInRange;
 
     private void Update()

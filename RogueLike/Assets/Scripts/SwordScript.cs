@@ -18,9 +18,10 @@ public class SwordScript : WeaponBehavior
 
     public override void Fire()
     {
+        if (this == null) return;
         if (boxCollider2d != null)
         {
-            boxCollider2d.enabled = true;
+            if(this.gameObject.activeSelf) boxCollider2d.enabled = true;
         } 
     }
 
