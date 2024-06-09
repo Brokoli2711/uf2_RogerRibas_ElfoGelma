@@ -28,19 +28,17 @@ public class Flamethrower : WeaponBehavior
                 //audioSource.Play();
             }
 
-            if (numberBullets <= 0)
-            {
-                StopFiring();
-                StartCoroutine(Recharge());
-            }
+            //if (numberBullets <= 0)
+            //{
+            //    StopFiring();
+            //    StartCoroutine(Recharge());
+            //}
         }
     }
-
     private void OnEnable()
     {
         InputManager.NotAttack += NotAttacking;
     }
-
 
     private void NotAttacking()
     {
@@ -112,11 +110,11 @@ public class Flamethrower : WeaponBehavior
 
     }
 
-    IEnumerator Recharge()
-    {
-        yield return new WaitForSeconds(3f);
+    //IEnumerator Recharge()
+    //{
+    //    yield return new WaitForSeconds(3f);
 
-        numberBullets = 10000;
+    //    numberBullets = 10000;
 
-    }
+    //}
 }

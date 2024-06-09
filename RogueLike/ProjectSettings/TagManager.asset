@@ -12,6 +12,8 @@ TagManager:
   - Sword
   - EnemySpawner
   - Rooms
+  - Seller
+  - Wall
   layers:
   - Default
   - TransparentFX

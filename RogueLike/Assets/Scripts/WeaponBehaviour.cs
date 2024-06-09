@@ -27,16 +27,13 @@ public abstract class WeaponBehavior : MonoBehaviour
     {
         if (inputManager != null)
         {
+            InputManager.OnAttack += Fire;
             MoveWeapon();
             RotateWeapon();
         }
 
     }
 
-    private void OnEnable()
-    {
-        InputManager.OnAttack += Fire;
-    }
 
     public abstract void MoveWeapon();  
 

@@ -9,8 +9,8 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private int maxRooms = 15;
     [SerializeField] private int minRooms = 7;
 
-    [SerializeField] public GameObject hatch;
-    [SerializeField] public GameObject[] enemySpawners;
+    public GameObject hatch;
+    public GameObject[] enemySpawners;
 
     public List<GameObject> roomList;
     int roomWidth = 20;
@@ -29,6 +29,7 @@ public class RoomManager : MonoBehaviour
 
     private bool generationComplete = false;
 
+
     private void Start()
     {
         roomGrid = new int[gridSizeX, gridSizeY];
@@ -38,8 +39,8 @@ public class RoomManager : MonoBehaviour
         Vector2Int initialRoomIndex = new Vector2Int(gridSizeX / 2, gridSizeY / 2);
         StartRoomGenerationFromRoom(initialRoomIndex);
 
-        Invoke("SpawnHatch", 2f);
-        Invoke("SpawnEnemySpawner", 3f);
+        Invoke("SpawnHatch", 1f);
+        Invoke("SpawnEnemySpawner", 1f);
     }
 
     private void Update()

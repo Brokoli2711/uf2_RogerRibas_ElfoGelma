@@ -12,16 +12,25 @@ public class LifeBarScript : MonoBehaviour
     private void Start()
     {
         slider = GetComponent<Slider>();
+        slider.maxValue = 3;
+        slider.value = 3;
     }
 
     public void ChangeMaxHp(float totalhp)
     {
-        slider.maxValue = totalhp;
+        if(slider != null)
+        {
+            slider.maxValue = totalhp;
+        } 
     }
 
     public void ChangeActualHp(float hp)
     {
-        slider.value = hp;
+        if(slider != null)
+        {
+            slider.value = hp;
+        }
+        
     }
 
     public void InitializeLifeBar(float maxHp)

@@ -13,11 +13,11 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 movementValue;
 
-    public int speed = 5;
-    public float totalhp = 3;
-    public float hp;
+    public int speed;
+    [SerializeField] public float totalhp;
+    [SerializeField] public float hp;
 
-   [SerializeField] private LifeBarScript lifeBar;
+    [SerializeField] private LifeBarScript lifeBar;
     public float damage = 0;
 
     private void Start()
@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         GetComponent<ParticleSystem>().Play();
         hp = hp - damage;
+        lifeBar.ChangeActualHp(hp);
         if (hp <= 0) SceneManager.LoadScene("Die");
     }
     private void Update()
@@ -40,7 +41,6 @@ public class PlayerController : MonoBehaviour
         ActionMove();
         if(lifeBar != null)
         {
-            lifeBar.ChangeActualHp(hp);
             lifeBar.ChangeMaxHp(totalhp);
             lifeBar.ChangeNumber(hp, totalhp);
         }
@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
 
     private void SwapWeapons()
     {
+        if (this == null) return;
         weapons[actualWeapon].gameObject.SetActive(false);
         actualWeapon++;
         if(actualWeapon >= weapons.Count) actualWeapon = 0;
