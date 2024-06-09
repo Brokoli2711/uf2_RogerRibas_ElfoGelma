@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     private InputManager inputM;
     private Rigidbody2D rb;
-    public GameObject[] weapons;
+    [SerializeField] public List<GameObject> weapons;
     public int actualWeapon;
 
     private Vector2 movementValue;
@@ -33,15 +33,23 @@ public class PlayerController : MonoBehaviour
     {
         GetComponent<ParticleSystem>().Play();
         hp = hp - damage;
-        if (hp < 0) SceneManager.LoadScene("Die");
+        if (hp <= 0) SceneManager.LoadScene("Die");
     }
     private void Update()
     {
-        InputManager.OnSwap += SwapWeapons;
         ActionMove();
-        lifeBar.ChangeActualHp(hp);
-        lifeBar.ChangeMaxHp(totalhp);
-        lifeBar.ChangeNumber(hp, totalhp);
+        if(lifeBar != null)
+        {
+            lifeBar.ChangeActualHp(hp);
+            lifeBar.ChangeMaxHp(totalhp);
+            lifeBar.ChangeNumber(hp, totalhp);
+        }
+        
+    }
+
+    private void OnEnable()
+    {
+        InputManager.OnSwap += SwapWeapons;
     }
 
     private void ActionMove()
@@ -55,7 +63,7 @@ public class PlayerController : MonoBehaviour
     {
         weapons[actualWeapon].gameObject.SetActive(false);
         actualWeapon++;
-        if(actualWeapon == weapons.Length) actualWeapon = 0;
+        if(actualWeapon >= weapons.Count) actualWeapon = 0;
         weapons[actualWeapon].gameObject.SetActive(true);
     }
 

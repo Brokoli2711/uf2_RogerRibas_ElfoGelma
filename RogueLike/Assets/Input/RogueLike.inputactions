@@ -43,7 +43,7 @@
                 },
                 {
                     "name": "Interact",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "9bd552d2-7489-4e78-b451-7cee49fd19d1",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -52,9 +52,9 @@
                 },
                 {
                     "name": "Swap",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "c0daa8ce-b6df-48d5-bd09-fe2dbf5c6625",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
