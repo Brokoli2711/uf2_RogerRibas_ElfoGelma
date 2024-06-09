@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 2290586128555383069}
   - component: {fileID: 7962625462488617109}
   - component: {fileID: 5393780045449156072}
+  - component: {fileID: 7413090724316813994}
   m_Layer: 0
   m_Name: Tutorial_NPC
   m_TagString: Untagged
@@ -312,6 +313,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.79962516, y: 0.59683317}
   m_EdgeRadius: 0
+--- !u!114 &7413090724316813994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6047865857022899021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b34596ba4c70374e8c3ba1c74e5667c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueMark: {fileID: 7049883585031893356}
+  dialogueUI: {fileID: 8110638241396539699}
 --- !u!1 &6796232058105830963
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,7 +630,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3349769724685297937
 RectTransform:
   m_ObjectHideFlags: 0
@@ -769,6 +784,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -8435245712485981826, guid: c522e7e6bf608ad41894670eb185e372, type: 3}
+--- !u!1 &7049883585031893356 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2253911629886400664, guid: c522e7e6bf608ad41894670eb185e372, type: 3}
+  m_PrefabInstance: {fileID: 103099644934956548}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7799052903337515273 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7878350319992209165, guid: c522e7e6bf608ad41894670eb185e372, type: 3}
