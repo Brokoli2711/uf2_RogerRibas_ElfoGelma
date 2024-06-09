@@ -8,11 +8,6 @@ public class Talk_NPC : MonoBehaviour
     [SerializeField] public GameObject dialogueUI;
     private bool isPlayerInRange;
     
-    
-    void Start()
-    {
-        
-    }
 
     private void Update()
     {
