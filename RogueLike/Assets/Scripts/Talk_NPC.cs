@@ -11,7 +11,7 @@ public class Talk_NPC : MonoBehaviour
 
     private void Update()
     {
-        if (isPlayerInRange) InputManager.OnInteraction += ShowUI;
+        InputManager.OnInteraction += ShowUI;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -34,6 +34,10 @@ public class Talk_NPC : MonoBehaviour
 
     private void ShowUI()
     {
-        dialogueUI.SetActive(true);
+        if (isPlayerInRange)
+        {     
+            dialogueUI.SetActive(true);
+        }
+            
     }
 }

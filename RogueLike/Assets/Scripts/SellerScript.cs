@@ -10,7 +10,7 @@ public class SellerScript : MonoBehaviour
 
     private void Update()
     {
-            if(isPlayerInRange && this.gameObject != null) InputManager.OnInteraction += ShowUI;
+        InputManager.OnInteraction += ShowUI;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,6 +34,7 @@ public class SellerScript : MonoBehaviour
 
     private void ShowUI()
     {
-        shopUI.SetActive(true);
+        if (isPlayerInRange && this.gameObject != null)
+            shopUI.SetActive(true);
     }
 }
