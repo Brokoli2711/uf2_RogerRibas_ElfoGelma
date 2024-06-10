@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DialogueScript : MonoBehaviour
@@ -40,25 +42,25 @@ public class DialogueScript : MonoBehaviour
     {
         index = 0;
         StartCoroutine(TypeLine());
+        gameObject.SetActive(true);
     }
 
     void NextLine()
     {
-        if(index < lines.Length -1)
-        {
-            index++;
-            textComponent.text = string.Empty;
-            gameObject.GetComponent<AudioSource>().Stop();
-            StartCoroutine(TypeLine());
-        }
-        else
-        {
-             gameObject.SetActive(false);
-        }
+        index++;
+        textComponent.text = string.Empty;
+        gameObject.GetComponent<AudioSource>().Stop();
+        StartCoroutine(TypeLine());
+
     }
 
     IEnumerator TypeLine()
     {
+        if (index >= lines.Length)
+        {
+            index = 0;
+        }
+
         foreach (char c in lines[index])
         {
             textComponent.text += c;

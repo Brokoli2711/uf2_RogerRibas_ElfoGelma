@@ -27,6 +27,11 @@ public class EnemySpawn : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("hola");
+            if (transform.childCount <= 0)
+            {
+                Destroy(this.gameObject);
+                return;
+            }
             foreach (GameObject e in enemies)
             {
                 e.SetActive(true);

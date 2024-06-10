@@ -21,6 +21,7 @@ public class SwordScript : WeaponBehavior
         if (this == null) return;
         if (boxCollider2d != null)
         {
+            audioSource.Play();
             if(this.gameObject.activeSelf) boxCollider2d.enabled = true;
         } 
     }

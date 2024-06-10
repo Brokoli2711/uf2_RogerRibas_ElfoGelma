@@ -32,7 +32,7 @@ public class PistolScript : WeaponBehavior
             for (int i = 0; i < numberBullets; i++)
             {
                 GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
-
+                audioSource.Play();
 
                 BulletScript newBulletManager = newBullet.GetComponent<BulletScript>();
                 newBulletManager.ShootBullet(inputManager.attackInput, bulletSpeed);

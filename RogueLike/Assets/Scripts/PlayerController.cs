@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float hp;
 
     [SerializeField] private LifeBarScript lifeBar;
+    [SerializeField] private AudioSource audioSource;
     public float damage = 0;
 
     private void Start()
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
     public void DealDamage(int damage)
     {
         GetComponent<ParticleSystem>().Play();
+        audioSource.Play();
         hp = hp - damage;
         lifeBar.ChangeActualHp(hp);
         if (hp <= 0) SceneManager.LoadScene("Die");

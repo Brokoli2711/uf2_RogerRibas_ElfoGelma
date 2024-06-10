@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    public float lifetime = 5f;
+    public float lifetime = 3f;
 
     void Start()
     {
@@ -19,7 +19,7 @@ public class Arrow : MonoBehaviour
             collision.BroadcastMessage("DealDamage", 1);
             Destroy(gameObject); // Destruye el proyectil después de golpear al jugador
         }
-        else if (collision.CompareTag("Obstacle"))
+        else if (collision.CompareTag("Wall"))
         {
             Destroy(gameObject); // Destruye el proyectil si golpea un obstáculo
         }

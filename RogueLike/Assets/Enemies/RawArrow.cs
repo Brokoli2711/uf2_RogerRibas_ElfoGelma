@@ -7,11 +7,13 @@ public class StationaryShooter : EnemyScript
     public float projectileSpeed = 10f;
     private SpriteRenderer spriteRenderer;
     private Transform player;
+    [SerializeField] private AudioSource audioSource;
     private float nextFireTime = 0f;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        audioSource = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -43,6 +45,7 @@ public class StationaryShooter : EnemyScript
         Vector2 direction = (targetPosition - shooterPosition).normalized;
 
         GameObject projectile = Instantiate(projectilePrefab, shooterPosition, Quaternion.identity);
+        audioSource.Play();
         projectile.tag = "Arrow";
 
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();

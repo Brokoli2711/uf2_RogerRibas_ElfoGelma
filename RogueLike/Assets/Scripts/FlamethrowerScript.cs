@@ -25,7 +25,7 @@ public class Flamethrower : WeaponBehavior
             {
                 isFiring = true;
                 fireParticles.Play();
-                //audioSource.Play();
+                audioSource.Play();
             }
 
             //if (numberBullets <= 0)
@@ -49,7 +49,7 @@ public class Flamethrower : WeaponBehavior
     {
         isFiring = false;
         fireParticles.Stop();
-        //audioSource.Stop();
+        audioSource.Stop();
     }
 
     override public void MoveWeapon()

@@ -17,7 +17,7 @@ public abstract class WeaponBehavior : MonoBehaviour
     public void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        //audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         inputManager = GetComponentInParent<InputManager>();
         transform.rotation = rotationQuaternion;
     }

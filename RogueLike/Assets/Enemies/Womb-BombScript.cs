@@ -5,7 +5,7 @@ using UnityEngine;
 public class WombBomb : EnemyScript
 {
     public float explosionRadius = 5f;
-    public AudioClip explosionSound; // Sonido explosion
+    public AudioSource explosionSound; // Sonido explosion
 
 
     public Animator wombAnimator;
@@ -15,6 +15,7 @@ public class WombBomb : EnemyScript
     private void Awake()
     {
         wombAnimator = GetComponent<Animator>();
+        explosionSound = GetComponent<AudioSource>();
     }
     void Start()
     {
@@ -54,7 +55,7 @@ public class WombBomb : EnemyScript
         //SonidoExplotar
         if (explosionSound != null)
         {
-            AudioSource.PlayClipAtPoint(explosionSound, transform.position);
+            explosionSound.Play();
         }
         // Check para player en la explosion
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
