@@ -6,8 +6,6 @@ public class Flamethrower : WeaponBehavior
 {
     public ParticleSystem fireParticles;
     public float damage = 0.1f;
-    public float fuelConsumptionRate; // La cantidad de combustible consumido por segundo
-
     private bool isFiring;
 
     private void Start()
@@ -19,21 +17,14 @@ public class Flamethrower : WeaponBehavior
 
     public override void Fire()
     {
-        if (numberBullets > 0)
-        {
-            if (!isFiring)
-            {
-                isFiring = true;
-                fireParticles.Play();
-                audioSource.Play();
-            }
 
-            //if (numberBullets <= 0)
-            //{
-            //    StopFiring();
-            //    StartCoroutine(Recharge());
-            //}
+        if (!isFiring)
+        {
+            isFiring = true;
+            fireParticles.Play();
+            audioSource.Play();
         }
+
     }
     private void OnEnable()
     {
@@ -109,12 +100,4 @@ public class Flamethrower : WeaponBehavior
         }
 
     }
-
-    //IEnumerator Recharge()
-    //{
-    //    yield return new WaitForSeconds(3f);
-
-    //    numberBullets = 10000;
-
-    //}
 }

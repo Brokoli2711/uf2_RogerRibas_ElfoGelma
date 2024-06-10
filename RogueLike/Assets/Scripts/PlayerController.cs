@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         if (hp <= 0) SceneManager.LoadScene("Die");
     }
     private void Update()
-    {
+    {        
         ActionMove();
         if(lifeBar != null)
         {

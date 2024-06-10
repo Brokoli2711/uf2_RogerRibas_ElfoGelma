@@ -32,8 +32,8 @@ public class InputManager : MonoBehaviour
     {
         movementInput = playerInput.actions["Move"].ReadValue<Vector2>();
         attackInput = playerInput.actions["Shoot"].ReadValue<Vector2>().normalized * 0.1f;
-        playerInput.actions["Interact"].performed += CheckInteraction;
         playerInput.actions["Swap"].performed += CheckSwap;
+        playerInput.actions["Interact"].performed += CheckInteraction;
         HandleMovementInput();
         CheckAttack();
     }
