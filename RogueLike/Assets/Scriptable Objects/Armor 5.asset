@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6c6b0822156568439c54f8972bffd35, type: 3}
   m_Name: Armor 5
   m_EditorClassIdentifier: 
-  title: "Coraz\xF3n"
-  description: Aumenta la Vida en 1
+  title: Armadura
+  description: Aumenta la Vida en 2
   baseCost: 500
